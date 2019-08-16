@@ -32,19 +32,32 @@ class PolyTreeNode
     end 
   end 
 
-def dfs(target_value)
-  # puts self.value 
-  # puts self.children[0].value
-  return self if self.value == target_value
-  if self.children.length >= 1 
-    (0...self.children.length).each do |i|
-      sub_tree = self.children
-      ans = sub_tree[i].dfs(target_value)
-      return ans unless ans.nil?
-    end
+  def dfs(target_value)
+    # puts self.value 
+    # puts self.children[0].value
+    return self if self.value == target_value
+    if self.children.length >= 1 
+      (0...self.children.length).each do |i|
+        sub_tree = self.children
+        ans = sub_tree[i].dfs(target_value)
+        return ans unless ans.nil?
+      end
+    end 
+    nil
   end 
-  nil
-end 
+
+  def bfs(target_value)
+    queue = [self]
+    until queue.empty?
+      ele = queue.shift 
+      if ele.value == target_value
+        return ele 
+      else 
+        queue.push(*ele.children)
+      end 
+    end  
+  end 
+
 
 
 end 
